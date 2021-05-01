@@ -1,0 +1,28 @@
+<div class="nav-wrapper">
+  <div class="menu">
+    <h3 class="logo">Logo</h3>
+    <div class="menu-icon" (click)="activateMenu()">
+      <div class="icon-bar" [ngClass]="{ 'active': isActive }"></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper">
+  <div class="content" [ngClass]="{ 'active': isActive }">
+    <ng-content></ng-content>
+  </div>
+
+  <nav>
+    <ul class="links">
+      <li
+        class="link"
+        *ngFor="let link of linkItems; let index = index"
+        [routerLink]="['/', link.path]" routerLinkActive="router-link-active"
+        [style]="'--index:' + (index*0.1 + 0.1) + 's'"
+        [ngClass]="{ 'active': isActive }"
+      >
+        {{link.name}}
+      </li>
+    </ul>
+  </nav>
+</div>

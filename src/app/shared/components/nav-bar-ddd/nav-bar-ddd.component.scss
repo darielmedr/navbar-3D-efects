@@ -1,0 +1,165 @@
+.nav-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4rem;
+  z-index: 999;
+}
+
+.menu {
+  width: 90%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-primary);
+}
+
+.logo {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.menu-icon {
+  width: 1.7rem;
+  height: 1.7rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.icon-bar {
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background-color: var(--color-primary);
+  transition: 0.5s;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: inherit;
+    height: inherit;
+    background-color: var(--color-primary);
+    transition: 0.5s;
+  }
+
+  &::before {
+    transform: translateY(-8px);
+  }
+
+  &::after {
+    transform: translateY(8px);
+  }
+}
+
+.icon-bar.active {
+  transform: rotate(360deg);
+  background-color: transparent;
+
+  &::before {
+    transform: translateY(0) rotate(-45deg);
+  }
+
+  &::after {
+    transform: translateY(0) rotate(45deg);
+  }
+}
+
+.wrapper {
+  background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(0, 0, 0, 0.15) 100%
+    ),
+    radial-gradient(
+        at top center,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(0, 0, 0, 0.4) 120%
+      )
+      #989898;
+  background-blend-mode: multiply, multiply;
+  overflow: hidden;
+}
+
+.content {
+  position: relative;
+  transform-origin: left;
+  transform-style: preserve-3d;
+  transition: 0.6s;
+  z-index: 2;
+}
+
+.content.active {
+  transform: perspective(1000px) rotateY(50deg) translateZ(50px) scale(0.5);
+}
+
+nav {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  transform: translate(-10%, -50%);
+}
+
+.links {
+  list-style: none;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.link {
+  padding: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: leave 0.5s ease forwards;
+}
+
+.link.active {
+  animation: enter 0.5s ease forwards;
+  animation-delay: var(--index);
+}
+
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes leave {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+
+@media screen and (min-width: 768px) {
+  .content.active {
+    transform: perspective(1000px) rotateY(30deg) translateZ(200px) scale(0.5);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .content.active {
+    transform: perspective(1000px) rotateY(20deg) translateZ(300px) scale(0.5);
+  }
+}
